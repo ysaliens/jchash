@@ -3,7 +3,6 @@ package main
 import "flag"
 import "strconv"
 import "log"
-import "context"
 import "time"
 import "os"
 import "os/signal"
@@ -35,13 +34,10 @@ func main() {
 	//Main execution pauses until we receive a request to shutdown on Stop channel
 	<-server.Stop
 
-	//Gracefully bring down server (Allow up to 5 sec to finish processing)
+	//Gracefully bring down server (Sleep 6 sec to allow db writes to complete)
 	log.Print("Received shutdown request, shutting down.")
-	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
-	defer cancel()
-	if err := server.Server.Shutdown(ctx); err != nil {
-		log.Printf("Error shutting down: %s", err)
-	} else {
-		log.Println("Server gracefully shut down.")
-	}
+	time.Sleep(6*time.Second)
+
+	//TODO: Sync package with wait groups can be used if we want to improve shutdown speed
+	log.Println("Server gracefully shut down.")
 }

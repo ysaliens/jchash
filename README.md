@@ -1,16 +1,16 @@
 # jchash
 
-A Go encryption HTTP server
+A Golang encryption HTTP server
 
 ## About
 jchash is a multi-threaded HTTP web server capable of encrypting passwords using SHA-512. It can
-* Encrypt a password given a "password=value" string with a POST HTTP request and store it
-* Retrieve a hashed password given an ID and a GET HTTP request
-* Display total hash requests served and average hash request response time in ms given a /stats command
-* Shutdown remotely given a /shutdown command
+* Encrypt a password given a "password=value" string with a `POST` HTTP request and store it
+* Retrieve a hashed password given an ID and a `GET` HTTP request
+* Display total hash requests served and average hash request response time in ms given a `GET` /stats command
+* Shutdown remotely given a `GET` /shutdown command
 
 ## Setup
-Install [Go](https://golang.org/)
+Install Go [https://golang.org](https://golang.org/)
 
 Clone git
 ```
@@ -63,4 +63,22 @@ To check how many hash requests (hash a password or retrieve a stored hash) the 
 ```
 The server will return a JSON object with the total number of hash requests processed thus far (including errors) and the average time to respond to a hash request in milliseconds. The server does not count /stats and /shutdown commands in these statistics. It also does not count the 5 seconds it takes for a hash `POST` to be written to the database as that is done in the background and does not affect response time from a client perspective. A quick note - the 0 ms average request time most often seen is correct - most hash commands take a fraction of a millisecond. Putting sleep, log, or print statements in the hash handlers will increase the average request time.
 
+## Testing
+There are two unit tests written utilizing the Go testing package
+* encode/encode_test.go - Tests SHA-512 encoding
+* handlers/hashHandler_test.go - Tests all major functionality of the server
+
+To run the tests, execute
+```
+➤ go test github.com/ysaliens/jchash/encode/
+ok      github.com/ysaliens/jchash/encode       0.054s
+
+➤ go test github.com/ysaliens/jchash/handlers/
+ok      github.com/ysaliens/jchash/handlers     12.071s
+```
+## Acknowledgements
+* [Go by Example](https://gobyexample.com/)
+* [Go Packages](https://golang.org/pkg/)
+* [Go Documentation](https://golang.org/doc/)
+* [Lots and lots of Google](www.google.com)
 

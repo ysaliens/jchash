@@ -88,3 +88,6 @@ ok      github.com/ysaliens/jchash/handlers     12.071s
 * [Go Documentation](https://golang.org/doc/)
 * [Lots and lots of Google](www.google.com)
 
+## Authors
+* [Steve Stoytchev](https://github.com/ysaliens)
+

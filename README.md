@@ -1,6 +1,6 @@
 # jchash
 
-A Golang encryption HTTP server
+A Golang password encryption HTTP server
 
 ## About
 jchash is a multi-threaded HTTP web server capable of encrypting passwords using SHA-512. It can

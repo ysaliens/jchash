@@ -80,6 +80,7 @@ ok      github.com/ysaliens/jchash/handlers     12.071s
 * Migrate to a real database - Currently the project uses a sync map to store data. This means the data is not saved between server restarts. When implemented, it should get it's own package and be separated from createServer.go
 * Add additional logging or performance stats 
 * Use the sync package and wait groups for faster shutdowns
+* Add a randomized ID-generation (Currently password hash IDs are issued in order)
 * Add additional testing
 
 ## Acknowledgements

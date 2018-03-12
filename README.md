@@ -31,7 +31,7 @@ The server can be started by running the executable ./jchash.exe. Port can be sp
 ```
 
 ## Hashing a password
-To hash a password, send a `POST` request such as `curl --data "password=$PASSWORD" http://localhost:8080/hash` where $PASSWORD is the password value. The `/hash` at the end instructs the server to hash the password using SHA-512 and store it. If the request is processed, the server will send status code 200 (OK) and return a numeric ID that can be used to retrieve the hash later. A hash command should return immediately, however the password will not be written to the database for 5 seconds.
+To hash a password, send a `POST` request such as `curl --data "password=$PASSWORD" http://localhost:8080/hash` where $PASSWORD is the password value. The `/hash` at the end instructs the server to hash the password using SHA-512 and store it. If the request is processed, the server will send status code 200 (OK) and return a numeric ID that can be used to retrieve the hash later. A hash command should return immediately. However, the password will not be written to the database for 5 seconds.
 ```
 ➤ curl --data "password=test2" http://localhost:8000/hash
 1  
@@ -80,7 +80,7 @@ ok      github.com/ysaliens/jchash/encode       0.054s
 ok      github.com/ysaliens/jchash/handlers     12.071s
 ```
 ## Future TO-DOs
-* Migrate to a real database - Currently the project uses a sync map to store data. This means the data is not saved between server restarts. When implemented, it should get it's own package and be separated from createServer.go
+* Migrate to a real database - Currently the project uses a sync map to store data. This means data is not saved between server restarts. When implemented, it should get its own package and be separated from createServer.go
 * Add additional logging or performance stats 
 * Use the sync package and wait groups for faster shutdowns
 * Add additional testing

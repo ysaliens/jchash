@@ -34,8 +34,8 @@ func MakeStats(handler http.Handler, stats *Stats) http.Handler {
             //Update server stats - thread-safe
             stats.timeLock.Lock()
             stats.totalTime = stats.totalTime + requestTime
-            stats.AverageTime = float32(stats.totalTime / time.Millisecond) / float32(stats.Requests)
             stats.Requests++
+            stats.AverageTime = float32(stats.totalTime / time.Millisecond) / float32(stats.Requests)
             stats.timeLock.Unlock()
             log.Printf("Request Complete: %v Average: %v",requestTime,stats.AverageTime)
         } 

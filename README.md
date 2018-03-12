@@ -63,6 +63,9 @@ To check how many hash requests (hash a password or retrieve a stored hash) the 
 ```
 The server will return a JSON object with the total number of hash requests processed thus far (including errors) and the average time to respond to a hash request in milliseconds. The server does not count /stats and /shutdown commands in these statistics. It also does not count the 5 seconds it takes for a hash `POST` to be written to the database as that is done in the background and does not affect response time from a client perspective. A quick note - the 0 ms average request time most often seen is correct - most hash commands take a fraction of a millisecond. Putting sleep, log, or print statements in the hash handlers will increase the average request time.
 
+## Logging
+The server uses the Golang log package to print information and errors as it processes requests. Additional debug log prints are sprinkled and commented out throughout the source code. The server does not currently save logs to a file.
+
 ## Testing
 There are two unit tests written utilizing the Go testing package
 * encode/encode_test.go - Tests SHA-512 encoding
